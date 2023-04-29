@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <PackageReference Include="NAudio" Version="2.1.0" />
+    <PackageReference Include="ScottPlot.WinForms" Version="4.1.63" />
   </ItemGroup>
 
 </Project>

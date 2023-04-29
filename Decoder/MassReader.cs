@@ -28,15 +28,14 @@ namespace audioCrackerBis.Decoder
 
                 if (!model.Model.TryGetValue(name, out _))
                 {
-                    model.Model[name] = new List<FileModel>();
+                    var fModel = new FileModel();
+
+                    fModel.Name = name;
+                    fModel.Amps = this.decoder.ReadAmplitudesFromFile(fileInfo.FullName).ToList();
+                      
+
+                    model.Model[name] = fModel;
                 }
-
-                var fModel = new FileModel();
-
-                fModel.Name = name;
-                fModel.Amps = this.decoder.ReadAmplitudesFromFile(fileInfo.FullName).ToList();
-
-                model.Model[name].Add(fModel);
             }
 
             return model;

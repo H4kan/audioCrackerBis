@@ -1,0 +1,40 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace audioCrackerBis.Representation
+{
+    public class PlotBuilder
+    {
+
+        private ScottPlot.FormsPlot plot;
+        private int topV = 10;
+
+        public PlotBuilder(ScottPlot.FormsPlot plot) { 
+            this.plot = plot;
+        }
+
+
+        public void DisplayData(IEnumerable<PlotValue> data)
+        {
+            var topData = data.Take(topV);
+            var positions = Enumerable.Range(0, topData.Count())
+                .Select(d => 2 * (double)d).ToArray();
+
+            var labels = topData.Select(x => x.Name).ToArray();
+
+            var values = topData.Select(x => x.Value).ToArray();
+
+            this.plot.Plot.XLabel("Phrases");
+            this.plot.Plot.YLabel("DTW");
+
+            this.plot.Plot.AddBar(values, positions);
+            this.plot.Plot.XTicks(positions, labels);
+            this.plot.Plot.SetAxisLimits(yMin: 0);
+
+            this.plot.Refresh();
+        }
+    }
+}

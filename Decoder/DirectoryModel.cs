@@ -9,17 +9,21 @@ namespace audioCrackerBis.Decoder
 {
     public class DirectoryModel
     {
-        public Dictionary<string, List<FileModel>>? Model = new Dictionary<string, List<FileModel>>();
+        public Dictionary<string, FileModel>? Model = new Dictionary<string, FileModel>();
 
-        public IEnumerable<IEnumerable<float>> GetFileModels(string key)
+        public FileModel GetFileModel(string key)
         {
             if (Model == null || Model[key] == null)
             {
                 throw new Exception("Audio data not exist");
             }
-            return Model[key].Select(f => f.Amps);
+            return Model[key];
         }
 
+        public IEnumerable<string> GetLabels()
+        {
+            return Model.Keys;
+        }
     }
 
 
