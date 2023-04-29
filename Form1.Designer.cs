@@ -58,6 +58,7 @@
             corrPlot.Name = "corrPlot";
             corrPlot.Size = new Size(1251, 359);
             corrPlot.TabIndex = 0;
+            corrPlot.Visible = false;
             // 
             // dictSelectBtn
             // 
@@ -89,6 +90,7 @@
             recordBtn.TabIndex = 3;
             recordBtn.Text = "Record";
             recordBtn.UseVisualStyleBackColor = false;
+            recordBtn.Click += recordBtn_Click;
             // 
             // selectTargetBtn
             // 
@@ -146,9 +148,10 @@
             durationLabel.AutoSize = true;
             durationLabel.Location = new Point(63, 107);
             durationLabel.Name = "durationLabel";
-            durationLabel.Size = new Size(53, 15);
+            durationLabel.Size = new Size(34, 15);
             durationLabel.TabIndex = 2;
-            durationLabel.Text = "Duration";
+            durationLabel.Text = "00:00";
+            durationLabel.Visible = false;
             // 
             // filenameLabel
             // 

@@ -51,9 +51,11 @@ namespace audioCrackerBis.DetectEngine
             var model = ProcessModel(framesCount);
             var algorithm = new Algorithm();
 
+            var processedTargetModel = ProcessFileModel(targetModel, framesCount);
+
             var tasks = model.GetLabels().Select(name =>
             {
-                return (name, algorithm.ConductAlgorithm(model.GetFileModel(name), targetModel));
+                return (name, algorithm.ConductAlgorithm(model.GetFileModel(name), processedTargetModel));
             });
 
             Task.WaitAll(tasks.Select(t => t.Item2).ToArray());
@@ -79,7 +81,7 @@ namespace audioCrackerBis.DetectEngine
             var model = new FileModel();
             model.Name = fileModel.Name;
 
-            model.Amps = this.wavDecoder.DivideIntoFrames(model.Amps, framesCount).Select(f => f.Average()).ToList();
+            model.Amps = this.wavDecoder.DivideIntoFrames(fileModel.Amps, framesCount).Select(f => f.Average()).ToList();
 
             return model;
         }
