@@ -23,8 +23,7 @@ namespace audioCrackerBis.Representation
 
         public void DisplayData(IEnumerable<PlotValue> data)
         {
-
-
+            this.plot.Reset();
             var topData = data.Take(topV);
             var positions = Enumerable.Range(0, topData.Count())
                 .Select(d => 2 * (double)d).ToArray();
@@ -42,6 +41,13 @@ namespace audioCrackerBis.Representation
             this.plot.Show();
 
             this.plot.Refresh();
+        }
+
+        public void SavePlot(string filePath)
+        {
+            this.plot.Plot.Style(figureBackground: Color.White);
+            var bmp = this.plot.Plot.Render();
+            bmp.Save(filePath.Replace(".wav", ".jpg"));
         }
     }
 }

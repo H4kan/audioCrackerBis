@@ -15,6 +15,7 @@ namespace audioCrackerBis
         private OpenFileDialog targetFileDialog = new OpenFileDialog();
 
         private Recorder recorder = new Recorder();
+        private string targetFilePath = "";
 
         private long currentMs = 0;
 
@@ -47,6 +48,7 @@ namespace audioCrackerBis
             if (this.targetFileDialog.ShowDialog() == DialogResult.OK)
             {
                 var fName = this.engine.SetupTarget(this.targetFileDialog.FileName);
+                this.targetFilePath = this.targetFileDialog.FileName;
                 this.filenameLabel.Text = fName;
                 this.filenameLabel.Show();
                 this.RefreshAnalysisButton();
@@ -66,6 +68,7 @@ namespace audioCrackerBis
                 {
                     this.plotBuilder.DisplayData(datas);
                     this.bestLabel.Text = $"Best matching: {datas.First().Name}";
+                    this.savePlotBtn.Show();
                     this.LockUI(false);
                 }));
             });
@@ -78,6 +81,7 @@ namespace audioCrackerBis
             this.selectTargetBtn.Enabled = !locked;
             this.recordBtn.Enabled = !locked;
             this.frameCountUpDown.Enabled = !locked;
+            this.savePlotBtn.Enabled = !locked;
         }
 
         private void RefreshAnalysisButton()
@@ -114,6 +118,11 @@ namespace audioCrackerBis
 
             this.currentMs = nextCurrent;
 
+        }
+
+        private void savePlotBtn_Click(object sender, EventArgs e)
+        {
+            this.plotBuilder.SavePlot(this.targetFilePath);
         }
     }
 }

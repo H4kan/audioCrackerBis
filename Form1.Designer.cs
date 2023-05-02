@@ -44,6 +44,7 @@
             frameCountUpDown = new NumericUpDown();
             bestLabel = new Label();
             analyzeBtn = new Button();
+            savePlotBtn = new Button();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             panel3.SuspendLayout();
@@ -53,7 +54,7 @@
             // corrPlot
             // 
             corrPlot.ForeColor = SystemColors.MenuBar;
-            corrPlot.Location = new Point(86, 245);
+            corrPlot.Location = new Point(13, 245);
             corrPlot.Margin = new Padding(4, 3, 4, 3);
             corrPlot.Name = "corrPlot";
             corrPlot.Size = new Size(1251, 359);
@@ -216,12 +217,25 @@
             analyzeBtn.UseVisualStyleBackColor = false;
             analyzeBtn.Click += analyzeBtn_Click;
             // 
+            // savePlotBtn
+            // 
+            savePlotBtn.BackColor = SystemColors.ButtonHighlight;
+            savePlotBtn.Location = new Point(1271, 384);
+            savePlotBtn.Name = "savePlotBtn";
+            savePlotBtn.Size = new Size(113, 39);
+            savePlotBtn.TabIndex = 9;
+            savePlotBtn.Text = "Save plot";
+            savePlotBtn.UseVisualStyleBackColor = false;
+            savePlotBtn.Visible = false;
+            savePlotBtn.Click += savePlotBtn_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ControlLight;
             ClientSize = new Size(1473, 628);
+            Controls.Add(savePlotBtn);
             Controls.Add(panel3);
             Controls.Add(selectTargetBtn);
             Controls.Add(dictSelectBtn);
@@ -258,5 +272,6 @@
         private Label bestLabel;
         private Label label2;
         private NumericUpDown frameCountUpDown;
+        private Button savePlotBtn;
     }
 }

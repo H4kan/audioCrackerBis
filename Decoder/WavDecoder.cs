@@ -18,7 +18,10 @@ namespace audioCracker.Decoder
         {
             string fileName = path;
             var soundFile = new FileInfo(fileName);
-            return Normalize(AmplitudesFromFile(soundFile));
+            return TrimEndings( 
+                Normalize(
+                    AmplitudesFromFile(soundFile)
+                ));
         }
 
         // https://stackoverflow.com/questions/19896149/read-in-a-wav-file-and-get-amplitudes
@@ -67,6 +70,15 @@ namespace audioCracker.Decoder
 
             return frames;
 
+        }
+
+        private IEnumerable<float> TrimEndings(IEnumerable<float> amplitudes)
+        {
+            var ampL = amplitudes.ToList();
+            var firstIdx = ampL.FindIndex(a => a > 0.2);
+            var lastIdx = ampL.FindLastIndex(a => a > 0.2);
+
+            return amplitudes.Skip(firstIdx).Take(lastIdx - firstIdx + 1);
         }
     }
 }
